@@ -13,34 +13,27 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import React, { useEffect, useState } from "react";
 import { Button } from '@mui/material';
 import axios from 'axios';
-import { Link, useNavigate } from "react-router-dom";
-import SComplaints from './SComplaints';
 
-
-
-const Complaint = ({name, description, title, imageURL ,FaultyName ,id }) => {
-
-  const navigate = useNavigate()
-  const deleteRequest = async () => {
-    const res = await axios
-      .delete(`http://localhost:5000/api/complaint/delete/${id}`)
-      .catch((err) => console.log(err));
-    const data = await res.data;
-    return data;
-  };
-  const handleDelete = (res) => {
-    deleteRequest().then(()=> alert("deleted"))
-  
+const SComplaints = ({name, description, title, imageURL ,FaultyName ,id}) => {
+    const [complaints, setcomplaint] = useState()
+    const sendRequest = async () => {
+     const res =  await  axios.get(`http://localhost:5000/api/omplaint/${id}`).catch(err=> console.log(err));
+        const data = await res.data;
+        return data ;
+    }
+    useEffect(() => {
+      sendRequest().then(data => setcomplaint(data.complaints));
     
-  };
-
- 
-
-
-
+      return () => {
+        
+      }
+    }, [id])
+    console.log(complaints)
+    
   return (
-    
-    <Card sx={{
+
+    <div className=' bg-gray-700 w-[90%] h-[500px]  overflow-scroll m-auto '>
+  <Card sx={{
       width: "90%",
       margin: "auto",
       mt: 2,
@@ -83,15 +76,10 @@ const Complaint = ({name, description, title, imageURL ,FaultyName ,id }) => {
        
       </CardContent>
      
-     <Button variant='contained'   onClick={handleDelete}>  delete</Button>
-    
+     <Button variant='contained' >  delete</Button>
   </Card>
+    </div>
+)
+}
 
-      
-      
-    
-  );
-};
-  
-  
-export default Complaint
+export default SComplaints

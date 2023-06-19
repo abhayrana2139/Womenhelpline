@@ -39,24 +39,13 @@ const DoDocomplaint = () => {
         e.preventDefault();
         console.log(inputs);
         sendRequest()
-            .then((data) => console.log(data)).then(() => alert('Complain registered')).then(() => navigate("/registered"))
+            .then((data) => console.log(data)).then(() => alert('Complain registered'))
 
     };
 
 
 
-    const deleteRequest = async () => {
-        const res = await axios
-          .delete(`http://localhost:5000/api/complaint/:id`)
-          .catch((err) => console.log(err));
-        const data = await res.data;
-        return data;
-      };
-      const handleDelete = () => {
-        deleteRequest()
-          .then(() => navigate("/"))
-          .then(() => navigate("/blogs"));
-      };
+  
 
 
 

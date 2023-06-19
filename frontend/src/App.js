@@ -21,6 +21,7 @@ import left from "./images/left.png"
 import right from "./images/right.png"
 import posh from "./images/posh.png"
 import mp from "./images/mp.png"
+import SComplaints from "./components/SComplaints";
 function App() {
   const isLoggedIn = useSelector(state => state.isLoggedIn);
   console.log(isLoggedIn)
@@ -50,7 +51,6 @@ function App() {
           <Route path='/Saftytips' Component={SaftyTips} />
 
 
-          
           <Route path='/Aboutus' Component={Aboutus} />
           <Route path='/registered' Component={Registered} />
 
